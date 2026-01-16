@@ -1,20 +1,21 @@
 <?php
+//make PHP strict
 declare(strict_types=1);
 
 $host = "localhost"; //hostname
-$db = "week_two"; //database name
+$db = "lab_one"; //database name
 $user = "root"; //username
 $password = ""; //password
 
 //points to the database
 $dsn = "mysql:host=$host;dbname=$db";
 
-//try to connect, if connected echo a yay!
+//try to connect and show the error if not connected
 try{
     $pdo = new PDO ($dsn, $user, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-    echo"<p> YAY CONNECTED! </p>";
+    echo"<p>CONNECTED!!</p>";
 
 }catch(PDOException $e){
-    die("Database connection failed: " . $e->getMessage());
+    die("Connection failed: " . $e->getMessage());
 }
