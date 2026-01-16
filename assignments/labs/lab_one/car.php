@@ -12,7 +12,7 @@ Class Car{
     public string $model;
 
     //constructor
-    public function __construct($make, $year, $model){
+    public function __construct(string $make, int $year, string $model){
         $this->make = $make;
         $this->year = $year;
         $this->model = $model;
