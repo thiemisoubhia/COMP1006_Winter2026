@@ -2,8 +2,8 @@
 require "header.php"; 
 //inclunding car as require
 require_once "car.php";
-//inclunding connect as require
-require_once "connect.php";
+//inclunding connect as include, because this file is not necessary to execute the index
+include "connect.php";
 
 
 echo "<p> Follow the instructions outlined in instructions.txt to complete this lab. Good luck & have fun!😀 </p>";
