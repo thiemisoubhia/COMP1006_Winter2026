@@ -1,4 +1,5 @@
 <?php 
+declare(strict_types=1);
 require "header.php"; 
 //inclunding car as require
 require_once "car.php";
