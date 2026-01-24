@@ -8,8 +8,8 @@
 */
 
 // From this lab, I learned how separating PHP logic into reusable include files
-// (like header, footer, and loops) improves organization and maintainability,
-// which I will apply in Course Project Phase One to keep my code scalable. 
+//(like header, footer, and loops) improves organization and maintainability,
+//which I will apply in Course Project Phase One to keep my code scalable. 
 
 $items = ["Home", "About", "Contact"];
 require "includes/header.php";

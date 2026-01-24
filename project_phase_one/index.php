@@ -3,7 +3,11 @@
 
 /* */
 
+// header and navbar
 require "parts/header.php";
+
+// footer
+require "parts/footer.php";
 
 // end php tag
 ?>
