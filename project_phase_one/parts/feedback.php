@@ -7,7 +7,7 @@
 
             <div class="carousel-inner text-center">
 
-                <!-- Item 1 -->
+                <!-- item 1 -->
                 <div class="carousel-item active">
                     <div class="mx-auto col-lg-8">
                         <blockquote class="blockquote">
@@ -21,7 +21,7 @@
                     </div>
                 </div>
 
-                <!-- Item 2 -->
+                <!-- item 2 -->
                 <div class="carousel-item">
                     <div class="mx-auto col-lg-8">
                         <blockquote class="blockquote">
@@ -35,7 +35,7 @@
                     </div>
                 </div>
 
-                <!-- Item 3 -->
+                <!-- ttem 3 -->
                 <div class="carousel-item">
                     <div class="mx-auto col-lg-8">
                         <blockquote class="blockquote">
@@ -51,7 +51,7 @@
 
             </div>
 
-            <!-- Controls -->
+            <!-- controls -->
             <button class="carousel-control-prev" type="button"
                 data-bs-target="#feedbackCarousel" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon"></span>
