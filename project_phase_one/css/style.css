@@ -1,3 +1,7 @@
+* {
+    font-family: "Libre Franklin", sans-serif;
+}
+
 header {
     background-color: #FEAFDF;
     border-bottom-right-radius: 15px;
@@ -6,7 +10,6 @@ header {
 
 nav {
     font-size: 18px;
-    font-family: "Bodoni Moda", serif;
 }
 
 a:hover {
