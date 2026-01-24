@@ -1,12 +1,24 @@
-header{
+header {
     background-color: #FEAFDF;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
 }
 
-nav{
+nav {
     font-size: 18px;
     font-family: "Bodoni Moda", serif;
 }
 
-a:hover{
+a:hover {
     text-decoration: underline;
+}
+
+#feedback {
+    background-color: #FEAFDF;
+}
+
+form {
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.3);
 }
