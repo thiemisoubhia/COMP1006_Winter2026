@@ -1,0 +1,12 @@
+header{
+    background-color: #FEAFDF;
+}
+
+nav{
+    font-size: 18px;
+    font-family: "Bodoni Moda", serif;
+}
+
+a:hover{
+    text-decoration: underline;
+}

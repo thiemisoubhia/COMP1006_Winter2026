@@ -1,6 +1,3 @@
-<!-- closing container-fluid div -->
-</div>
-
 <footer class="bg-dark">
      <!-- Copyright -->
     <div class="text-center p-3">
