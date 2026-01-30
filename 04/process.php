@@ -51,13 +51,15 @@ if (count($itemsOrdered) === 0) {
     $errors[] = "Please order at least one item";
 }
 
-foreach($errors as $error) : ?>
-    <li><?php echo $error; ?></li>
- <?php endforeach;
+if (!empty($errors)) {
+    foreach ($errors as $error) : ?>
+        <li><?php echo $error; ?></li>
+<?php endforeach;
+}
 
 
- //stop the script 
- exit;
+//stop the script 
+exit;
 
 ?>
 <main>
