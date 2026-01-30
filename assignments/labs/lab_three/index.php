@@ -1,41 +1,116 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php require "includes/header.php" ?>
+<main>
+    <h2> Order Online - Easy & Simple (And Totally Secure...) 🧁</h2>
+    <form action="" method="post">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>>Bake It Till You Make It</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+        <!-- Customer Information -->
+        <fieldset>
+            <legend>Customer Information</legend>
+            <label for="first_name">First name</label>
+            <input type="text" id="first_name" name="first_name">
+            <label for="last_name">Last name</label>
+            <input type="text" id="last_name" name="last_name">
+            <label for="phone">Phone number</label>
+            <input type="text" id="phone" name="phone" placeholder="555-123-4567">
+            <label for="address">Address</label>
+            <input type="text" id="address" name="address">
+            <label for="email">Address</label>
+            <input type="text" id="email" name="email">
+        </fieldset>
 
-</head>
+        <!-- Order Details -->
+        <fieldset>
+            <legend>Order Details</legend>
 
-<body>
-    <h2>Contact Bake It Till You Make It</h2>
-    <!-- bootstap form -->
-    <form action="contact.php" method="POST">
-        <div class="mb-3">
-            <label for="firstName" class="form-label">First name:</label>
-            <input type="text" class="form-control" id="firstName" name="firstname" required>
-        </div>
+            <p>
+                Enter a quantity for each item (use 0 if you don't want it).
+            </p>
 
-        <div class="mb-3">
-            <label for="lastName" class="form-label">Last name:</label>
-            <input type="text" class="form-control" id="lastName" name="lastname" required>
-        </div>
+            <table border="1" cellpadding="8" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th scope="col">Baked Treat</th>
+                        <th scope="col">Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">Chaos Croissant 🥐</th>
+                        <td>
+                            <label for="chaos_croissant" class="visually-hidden">Chaos Croissant quantity</label>
+                            <input type="text" id="chaos_croissant" name="items[chaos_croissant]" min="0" max="24" value="0">
+                        </td>
+                    </tr>
 
-        <div class="mb-3">
-            <label for="emailAddr" class="form-label">Email address:</label>
-            <input type="email" class="form-control" id="emailAddr" name="email" aria-describedby="emailHelp" required>
-            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-        </div>
+                    <tr>
+                        <th scope="row">Midnight Muffin 🌙</th>
+                        <td>
+                            <label for="midnight_muffin" class="visually-hidden">Midnight Muffin quantity</label>
+                            <input type="text" id="midnight_muffin" name="items[midnight_muffin]" min="0" max="24" value="0">
+                        </td>
+                    </tr>
 
-        <div class="form-floating mb-3">
-            <textarea class="form-control" placeholder="Leave a comment here" id="message" name="message" style="height: 100px" required></textarea>
-            <label for="message">Message</label>
-        </div>
+                    <tr>
+                        <th scope="row">Existential Éclair 🤔</th>
+                        <td>
+                            <label for="existential_eclair" class="visually-hidden">Existential Éclair quantity</label>
+                            <input type="text" id="existential_eclair" name="items[existential_eclair]" min="0" max="24"
+                                value="0">
+                        </td>
+                    </tr>
 
-        <button type="submit" class="btn btn-primary">Submit</button>
+                    <tr>
+                        <th scope="row">Procrastination Cookie ⏰</th>
+                        <td>
+                            <label for="procrastination_cookie" class="visually-hidden">Procrastination Cookie quantity</label>
+                            <input type="text" id="procrastination_cookie" name="items[procrastination_cookie]" min="0" max="24"
+                                value="0">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">Finals Week Brownie 📚</th>
+                        <td>
+                            <label for="finals_week_brownie" class="visually-hidden">Finals Week Brownie quantity</label>
+                            <input type="text" id="finals_week_brownie" name="items[finals_week_brownie]" min="0" max="24"
+                                value="0">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">Victory Cinnamon Roll 🏆</th>
+                        <td>
+                            <label for="victory_cinnamon_roll" class="visually-hidden">Victory Cinnamon Roll quantity</label>
+                            <input type="text" id="victory_cinnamon_roll" name="items[victory_cinnamon_roll]" min="0" max="24"
+                                value="0">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </fieldset>
+
+        <fieldset>
+            <legend>Additional Comments</legend>
+
+            <p>
+                <label for="comments">Comments (optional)</label><br>
+                <textarea id="comments" name="comments" rows="4"
+                    placeholder="Allergies, delivery instructions, custom messages..."></textarea>
+            </p>
+        </fieldset>
+
+        <p>
+            <button type="submit">Place Order</button>
+        </p>
+
     </form>
+
+    <!-- contact form -->
+    <?php require "includes/contact.php" ?>
+</main>
 </body>
 
 </html>
+
+<?php require "includes/footer.php" ?>
