@@ -1,4 +1,12 @@
-  <div id="forms">
+<?php
+require_once "connect.php";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+}
+?> 
+ 
+ <div id="forms">
        <h2>Creating your <img src="images/logo.png" alt="" width="150px"></h2>
        <form method="POST" action="">
            <div class="row mb-3">
