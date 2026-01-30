@@ -1,4 +1,4 @@
-<form action="connect.php" method="post">
+<form action="mail.php" method="post">
 
     <!-- Contact Information -->
     <fieldset>
@@ -15,7 +15,7 @@
 
     </fieldset>
 
-    <!-- Message -->
+    <!-- message textarea -->
     <fieldset>
         <legend>Message</legend>
 
