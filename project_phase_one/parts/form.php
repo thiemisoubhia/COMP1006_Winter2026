@@ -1,14 +1,6 @@
-<?php
-require_once "connect.php";
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-}
-?> 
- 
- <div id="forms">
+  <div id="forms">
        <h2>Creating your <img src="images/logo.png" alt="" width="150px"></h2>
-       <form method="POST" action="">
+       <form method="POST" action="create.php">
            <div class="row mb-3">
                <div class="col">
                    <label for="firstName" class="form-label">First Name</label>
