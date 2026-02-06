@@ -1,11 +1,11 @@
 <?php
 //  TODO: connect to the database 
-require "includes/connect.php";  
+require "includes/connect.php";
 
 //   TODO: Grab form data (no validation or sanitization for this lab)
- $firstname = $_POST['first_name'];
- $lastname = $_POST['last_name'];
- $email = $_POST['email'];
+$firstName = $_POST['first_name'];
+$lastName = $_POST['last_name'];
+$email = $_POST['email'];
 
 /*
   1. Write an INSERT statement with named placeholders
@@ -20,13 +20,19 @@ VALUES (:first_name, :last_name, :email)";
 /*prepare the statement*/
 $stmt = $pdo->prepare($sql);
 
-//array of values - prevent sql injection
-$stmt->execute([
-    ':first_name' => $firstname,
-    ':last_name'  => $lastname,
-    ':email'      => $email
-]);
 
+//map the named placeholder to the user data
+$stmt->bindParam(':first_name', $firstName);
+$stmt->bindParam(':last_name', $lastName);
+$stmt->bindParam(':email', var: $email);
+
+
+//execute array of values - prevent sql injection
+$stmt->execute([$firstname,$lastname, $email]);
+
+
+//close the connection after that
+$pdo = null;
 
 ?>
 <!DOCTYPE html>

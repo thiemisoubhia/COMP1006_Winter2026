@@ -79,4 +79,33 @@ if (!empty($errors)) {
     </p>
 </div>
 
-<?php require "includes/footer.php"; ?>
+<?php require "includes/footer.php";
+
+
+/*5*/
+
+//build our query using named placeholders
+
+$sql = "INSERT INTO orders (first_name, last_name, phone, address, email, comments) VALUES
+(:first_name, :last_name, :phone, :address, :email, :comments)";
+
+
+//prepare the query 
+$stmt = $pdo->prepare($sql);
+
+//map the named placeholder to the user data/actual data
+$stmt->bindParam(':first_name', $firstName);
+$stmt->bindParam(':last_name', $lastName);
+$stmt->bindParam(':phone', $phone);
+$stmt->bindParam(':email', $email);
+$stmt->bindParam(':address', $address);
+$stmt->bindParam(':comments',  $comments);
+
+$stmt->execute();
+
+$pdu = null;
+
+?>
+
+<? require "includes/header.php"?>
+<div class="alert alert-success">
