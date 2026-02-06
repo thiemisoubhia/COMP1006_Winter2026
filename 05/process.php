@@ -1,5 +1,5 @@
 <?php
-
+//require database connection script
 require "includes/connect.php";  
 
 /*1*/

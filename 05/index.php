@@ -20,7 +20,7 @@
     </fieldset>
 
     <!-- Order Details -->
-    <fieldset class="form-group">
+    <!-- <fieldset class="form-group">
       <legend>Order Details</legend>
 
       <p>
@@ -89,7 +89,7 @@
         </tbody>
       </table>
 
-    </fieldset>
+    </fieldset> -->
 
     <fieldset class="form-group">
       <legend>Additional Comments</legend>
