@@ -42,6 +42,16 @@ $subscribers = $stmt->fetchAll(PDO::FETCH_ASSOC);
       </thead>
       <tbody>
         <!-- TODO: Loop through $subscribers and output each row -->
+        <tr>
+          <?php
+          foreach ($subscribers as $td):
+            echo "<td>" . $sub['id'] . "</td>";
+            echo "<td>" . $sub['first_name'] . "</td>";
+            echo "<td>" . $sub['last_name'] . "</td>";
+            echo "<td>" . $sub['subscribed_at'] . "</td>";
+          endforeach;
+          ?>
+        </tr>
       </tbody>
     </table>
   <?php endif; ?>
