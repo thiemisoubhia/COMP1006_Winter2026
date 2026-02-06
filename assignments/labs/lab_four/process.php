@@ -4,6 +4,9 @@ require "includes/header.php";
 require "includes/connect.php";  
 
 //   TODO: Grab form data (no validation or sanitization for this lab)
+ $firstname = $_POST['first_name'];
+ $lastname = $_POST['last_name'];
+ $email = $_POST['email'];
 
 /*
   1. Write an INSERT statement with named placeholders
