@@ -11,6 +11,12 @@ require "includes/connect.php";
   5. Fetch all results into $subscribers
 */
 
+//select
+$sqlSelect = "SELECT id, first_name, last_name, email, subscribed_at
+        FROM subscribers
+        ORDER BY subscribed_at DESC";
+
+
 $subscribers = []; // placeholder
 ?>
 
