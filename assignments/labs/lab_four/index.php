@@ -8,7 +8,7 @@
 </head>
 
 <body>
-
+    <?php include 'includes/header.php'; ?>
     <main class="container mt-4">
         <h1>Subscribe to Our Mailing List</h1>
 
