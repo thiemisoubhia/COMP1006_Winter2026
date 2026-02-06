@@ -103,7 +103,7 @@ $stmt->bindParam(':comments',  $comments);
 
 $stmt->execute();
 
-$pdu = null;
+$pdo = null;
 
 ?>
 

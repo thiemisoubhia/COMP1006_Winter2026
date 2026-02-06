@@ -27,8 +27,8 @@ $stmt->bindParam(':last_name', $lastName);
 $stmt->bindParam(':email', var: $email);
 
 
-//execute array of values - prevent sql injection
-$stmt->execute([$firstname,$lastname, $email]);
+//execute statement
+$stmt->execute();
 
 
 //close the connection after that
@@ -51,7 +51,7 @@ $pdo = null;
 
         <!-- TODO: Display a confirmation message -->
         <!-- Example: "Thanks, Name! You have been added to our mailing list." -->
-        <?php echo "<h2>Thanks, " . $firstname . "! You have been added to our mailing list. </h2>" ?>
+        <?php echo "<h2>Thanks, " . $firstName . "! You have been added to our mailing list. </h2>" ?>
 
         <p class="mt-3">
             <a href="subscribers.php">View Subscribers</a>
