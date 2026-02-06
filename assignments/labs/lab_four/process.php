@@ -12,8 +12,6 @@ require "includes/connect.php";
   1. Write an INSERT statement with named placeholders
   2. Prepare the statement
   3. Execute the statement with an array of values
-  4.
-
 */
 
 ?>
@@ -33,7 +31,7 @@ require "includes/connect.php";
 
         <!-- TODO: Display a confirmation message -->
         <!-- Example: "Thanks, Name! You have been added to our mailing list." -->
-
+        <?php echo "<h2>Thanks, " . $firstname . "! You have been added to our mailing list. </h2>" ?>
 
         <p class="mt-3">
             <a href="subscribers.php">View Subscribers</a>
