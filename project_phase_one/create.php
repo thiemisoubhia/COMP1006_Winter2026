@@ -60,7 +60,7 @@ if (!empty($errors)) {
 }
 
 // Insert
-$sql = "INSERT INTO users
+$sql = "INSERT INTO resumes
 (first_name, last_name, position, skills, email, phone, bio)
 VALUES
 (:first_name, :last_name, :position, :skills, :email, :phone, :bio)";
