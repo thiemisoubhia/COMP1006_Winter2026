@@ -5,29 +5,29 @@
 
     <!-- Customer Information -->
     <!-- Step One - Add Client Side Validation with HTML Attributes -->
-    <fieldset>
+    <fieldset class="form-group">
       <legend>Customer Information</legend>
-        <label for="first_name">First name</label>
-        <input type="text" id="first_name" name="first_name">
-        <label for="last_name">Last name</label>
-        <input type="text" id="last_name" name="last_name">
-        <label for="phone">Phone number</label>
-        <input type="tel" id="phone" name="phone" placeholder="555-123-4567">
-        <label for="address">Address</label>
-        <input type="text" id="address" name="address">
-        <label for="email">Email</label>
-        <input type="text" id="email" name="email">
+        <label for="first_name" class="form-label">First name</label>
+        <input type="text" id="first_name" name="first_name" class="form-control">
+        <label for="last_name" class="form-label">Last name</label>
+        <input type="text" id="last_name" name="last_name" class="form-control">
+        <label for="phone" class="form-label">Phone number</label>
+        <input type="tel" id="phone" name="phone" placeholder="555-123-4567" class="form-control">
+        <label for="address" class="form-label">Address</label>
+        <input type="text" id="address" name="address" class="form-control">
+        <label for="email" class="form-label">Email</label>
+        <input type="text" id="email" name="email" class="form-control">
     </fieldset>
 
     <!-- Order Details -->
-    <fieldset>
+    <fieldset class="form-group">
       <legend>Order Details</legend>
 
       <p>
         Enter a quantity for each item (use 0 if you don't want it).
       </p>
 
-      <table border="1" cellpadding="8" cellspacing="0">
+      <table border="1" cellpadding="8" cellspacing="0" class="table">
         <thead>
           <tr>
             <th scope="col">Baked Treat</th>
@@ -39,7 +39,7 @@
             <th scope="row">Chaos Croissant 🥐</th>
             <td>
               <label for="chaos_croissant" class="visually-hidden">Chaos Croissant quantity</label>
-              <input type="number" id="chaos_croissant" name="items[chaos_croissant]" min="0" max="24" value="0">
+              <input type="number" id="chaos_croissant" name="items[chaos_croissant]" min="0" max="24" value="0" class="form-control">
             </td>
           </tr>
 
@@ -47,7 +47,7 @@
             <th scope="row">Midnight Muffin 🌙</th>
             <td>
               <label for="midnight_muffin" class="visually-hidden">Midnight Muffin quantity</label>
-              <input type="number" id="midnight_muffin" name="items[midnight_muffin]" min="0" max="24" value="0">
+              <input type="number" id="midnight_muffin" name="items[midnight_muffin]" min="0" max="24" value="0" class="form-control" >
             </td>
           </tr>
 
@@ -56,7 +56,7 @@
             <td>
               <label for="existential_eclair" class="visually-hidden">Existential Éclair quantity</label>
               <input type="number" id="existential_eclair" name="items[existential_eclair]" min="0" max="24"
-                value="0">
+                value="0"  class="form-control">
             </td>
           </tr>
 
@@ -65,7 +65,7 @@
             <td>
               <label for="procrastination_cookie" class="visually-hidden">Procrastination Cookie quantity</label>
               <input type="number" id="procrastination_cookie" name="items[procrastination_cookie]" min="0" max="24"
-                value="0">
+                value="0"  class="form-control">
             </td>
           </tr>
 
@@ -74,7 +74,7 @@
             <td>
               <label for="finals_week_brownie" class="visually-hidden">Finals Week Brownie quantity</label>
               <input type="number" id="finals_week_brownie" name="items[finals_week_brownie]" min="0" max="24"
-                value="0">
+                value="0"  class="form-control">
             </td>
           </tr>
 
@@ -83,7 +83,7 @@
             <td>
               <label for="victory_cinnamon_roll" class="visually-hidden">Victory Cinnamon Roll quantity</label>
               <input type="number" id="victory_cinnamon_roll" name="items[victory_cinnamon_roll]" min="0" max="24"
-                value="0">
+                value="0"  class="form-control">
             </td>
           </tr>
         </tbody>
@@ -91,18 +91,18 @@
 
     </fieldset>
 
-    <fieldset>
+    <fieldset class="form-group">
       <legend>Additional Comments</legend>
 
       <p>
-        <label for="comments">Comments (optional)</label><br>
+        <label class="form-label" for="comments">Comments (optional)</label><br>
         <textarea id="comments" name="comments" rows="4"
-          placeholder="Allergies, delivery instructions, custom messages..."></textarea>
+          placeholder="Allergies, delivery instructions, custom messages..." class="form-control"></textarea>
       </p>
     </fieldset>
 
     <p>
-      <button type="submit">Place Order</button>
+      <button type="submit" class="btn btn-primary">Place Order</button>
     </p>
 
   </form>
