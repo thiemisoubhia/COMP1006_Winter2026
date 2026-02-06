@@ -1,6 +1,7 @@
 <?php
 //TODO:
 require "includes/connect.php";
+include "includes/header.php";
 
 /*
   TODO:
