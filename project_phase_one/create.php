@@ -65,8 +65,10 @@ $sql = "INSERT INTO users
 VALUES
 (:first_name, :last_name, :position, :skills, :email, :phone, :bio)";
 
+// Prepare the statement
 $stmt = $pdo->prepare($sql);
 
+//array of values
 $stmt->execute([
     ':first_name' => $firstName,
     ':last_name'  => $lastName,
