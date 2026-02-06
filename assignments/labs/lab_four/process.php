@@ -14,6 +14,21 @@ require "includes/connect.php";
   3. Execute the statement with an array of values
 */
 
+/*Insert*/
+$sql = "INSERT INTO subscribers(first_name, last_name, email)
+VALUES (:first_name, :last_name, :email)";
+
+/*prepare the statement*/
+$stmt = $pdo->prepare($sql);
+
+//array of values - prevent sql injection
+$stmt->execute([
+    ':first_name' => $firstname,
+    ':last_name'  => $lastname,
+    ':email'      => $email
+]);
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +36,7 @@ require "includes/connect.php";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Subscribed</title>
 </head>
 
 <body>
