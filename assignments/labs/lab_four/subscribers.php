@@ -12,12 +12,16 @@ require "includes/connect.php";
 */
 
 //select
-$sqlSelect = "SELECT id, first_name, last_name, email, subscribed_at
-        FROM subscribers
-        ORDER BY subscribed_at DESC";
+$sqlSelect = "SELECT id, first_name, last_name, email, subscribed_at FROM subscribers ORDER BY subscribed_at DESC";
+
+//prepare the statement and execute
+$stmt = $pdo->prepare($sqlSelect);
+$stmt->execute();
 
 
 $subscribers = []; // placeholder
+//fetch all results in subscribers
+$subscribers = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <main class="container mt-4">
