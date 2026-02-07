@@ -1,9 +1,6 @@
 <!-- started on January 24th, 2026 -->
 <!-- this project was created using Bootstrap 5.0 official documentation: https://getbootstrap.com/docs/5.0/ -->
- <?php
-
-/* */
-
+<?php
 // header and navbar
 require "parts/header.php";
 

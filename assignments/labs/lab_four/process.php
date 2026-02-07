@@ -1,6 +1,6 @@
 <?php
 //  TODO: connect to the database 
-require "includes/connect.php";
+require_once "includes/connect.php";
 
 //   TODO: Grab form data (no validation or sanitization for this lab)
 $firstName = $_POST['first_name'];
@@ -29,7 +29,6 @@ $stmt->bindParam(':email', var: $email);
 
 //execute statement
 $stmt->execute();
-
 
 //close the connection after that
 $pdo = null;

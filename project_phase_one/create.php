@@ -19,11 +19,11 @@ $bio       = filter_input(INPUT_POST, 'bio', FILTER_SANITIZE_SPECIAL_CHARS);
 $errors = [];
 
 //require text fields
-if ($firstname === null || $firstname === '') {
+if ($firstName === null || $firstName === '') {
     $errors[] = "First name is required";
 }
 
-if ($lastname === null || $lastname === '') {
+if ($lastName === null || $lastName === '') {
     $errors[] = "Last name is required";
 }
 
@@ -68,15 +68,29 @@ VALUES
 // Prepare the statement
 $stmt = $pdo->prepare($sql);
 
-//array of values
-$stmt->execute([
-    ':first_name' => $firstName,
-    ':last_name'  => $lastName,
-    ':position'   => $position,
-    ':skills'     => $skills,
-    ':email'      => $email,
-    ':phone'      => $phone,
-    ':bio'        => $bio
-]);
 
-echo "<h2>Resume Saved Successfully!</h2>";
+//map the named placeholder to the user data
+$stmt->bindParam(':first_name', $firstName);
+$stmt->bindParam(':last_name', $lastName);
+$stmt->bindParam(':email', $email);
+$stmt->bindParam(':position', $position);
+$stmt->bindParam(':skills', $skills);
+$stmt->bindParam(':phone',$phone);
+$stmt->bindParam(':bio',$bio);
+
+//execute statement
+$stmt->execute();
+
+
+include "parts/header.php";
+?>
+     <main class="container mt-4 text-center p-5">
+        <h2>Resume Saved Successfull</h2>
+
+        <?php echo "<h2>Thank you, " . $firstName . "! Your resume has been added to the system. </h2>" ?>
+
+        <p class="mt-3">
+            <a class="btn btn-dark" href="resumes.php">View Resumes</a>
+            <a class="btn btn-dark" href="resumes.php">Return to home</a>
+        </p>
+    </main>
