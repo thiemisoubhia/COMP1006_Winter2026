@@ -13,6 +13,22 @@ $stmt = $pdo->prepare($sqlSelect);
 $stmt->execute();
 
 $resumes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+//delete
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_id'])) {
+    $id = filter_input(INPUT_POST, 'delete_id', FILTER_VALIDATE_INT);
+
+    if ($id) {
+        $sql = "DELETE FROM resumes WHERE id = :id";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([':id' => $id]);
+    }
+
+    header("Location: resumes.php");
+    exit;
+}
+
 ?>
 
 <main class="container mt-4">
@@ -48,7 +64,7 @@ $resumes = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <td class="text-nowrap">
               <a
                 href="edit_resume.php?id=<?= $resume['id'] ?>"
-                class="btn btn-sm btn-warning">
+                class="btn btn-sm btn-secondary">
                 Edit
               </a>
 
