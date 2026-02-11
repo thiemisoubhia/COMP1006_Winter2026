@@ -17,16 +17,16 @@ $resumes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 //delete
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_id'])) {
-    $id = filter_input(INPUT_POST, 'delete_id', FILTER_VALIDATE_INT);
+  $id = filter_input(INPUT_POST, 'delete_id', FILTER_VALIDATE_INT);
 
-    if ($id) {
-        $sql = "DELETE FROM resumes WHERE id = :id";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([':id' => $id]);
-    }
+  if ($id) {
+    $sql = "DELETE FROM resumes WHERE id = :id";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([':id' => $id]);
+  }
 
-    header("Location: resumes.php");
-    exit;
+  header("Location: resumes.php");
+  exit;
 }
 
 ?>
@@ -69,15 +69,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_id'])) {
               </a>
 
               <form
-                action="delete_resume.php"
                 method="post"
                 class="d-inline"
                 onsubmit="return confirm('Are you sure you want to delete this resume?');">
-                <input type="hidden" name="id" value="<?= $resume['id'] ?>">
+                <input type="hidden" name="delete_id" value="<?= $resume['id'] ?>">
                 <button type="submit" class="btn btn-sm btn-danger">
                   Delete
                 </button>
               </form>
+
             </td>
           </tr>
         <?php endforeach; ?>
