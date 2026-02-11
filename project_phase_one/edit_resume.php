@@ -10,6 +10,59 @@ if (!$id) {
     header("Location: resumes.php");
     exit;
 }
+
+//search the resume using the ID
+$sql = "SELECT * FROM resumes WHERE id = :id";
+
+$stmt = $pdo->prepare($sql);
+$stmt->execute([':id' => $id]);
+
+$resume = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if (!$resume) {
+    header("Location: resumes.php");
+    exit;
+}
+
+//if submitted edit
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    $first_name = trim($_POST['first_name']);
+    $last_name  = trim($_POST['last_name']);
+    $position   = trim($_POST['position']);
+    $skills     = trim($_POST['skills']);
+    $email      = trim($_POST['email']);
+    $phone      = trim($_POST['phone']);
+    $bio        = trim($_POST['bio']);
+
+    $sqlUpdate = "
+        UPDATE resumes
+        SET first_name = :first_name,
+            last_name = :last_name,
+            position = :position,
+            skills = :skills,
+            email = :email,
+            phone = :phone,
+            bio = :bio
+        WHERE id = :id
+    ";
+
+    $stmt = $pdo->prepare($sqlUpdate);
+    $stmt->execute([
+        ':first_name' => $first_name,
+        ':last_name'  => $last_name,
+        ':position'   => $position,
+        ':skills'     => $skills,
+        ':email'      => $email,
+        ':phone'      => $phone,
+        ':bio'        => $bio,
+        ':id'         => $id
+    ]);
+
+    header("Location: resumes.php");
+    exit;
+}
+
 ?>
 
 
