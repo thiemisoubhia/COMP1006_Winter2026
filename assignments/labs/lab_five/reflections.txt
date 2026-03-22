@@ -1,0 +1,20 @@
+1. What is the purpose of the $_FILES superglobal in PHP?
+The $_FILES superglobal is used to access files that are uploaded through a form. 
+It stores information about the uploaded file such as the file name, type, size, temporary location, and any errors during upload.
+
+
+2. Why does a form need special settings to upload files?
+A form needs the setting enctype="multipart/form-data" because it allows the browser to send file data properly to the server.
+Without this setting, the file will not be uploaded and PHP won’t be able to read it.
+
+
+3. What function is used to move uploaded files to a folder?
+The function used is move_uploaded_file(). It takes the temporary uploaded file and moves it to a permanent folder on the server.
+// move file to uploads folder
+                if (move_uploaded_file($_FILES['profile_image']['tmp_name'], $uploads)) {
+                    $imagePath = 'uploads/' . $filename;
+                } 
+
+
+4. Why is it important to control where uploaded files are stored?
+It is important for security, organization and future access. If files are not stored in a controlled location, users could upload malicious files, overwrite and also access sensitive parts of the system. Keeping them in a specific folder (like “uploads”) helps keep the project safe.
