@@ -1,4 +1,9 @@
-<!-- project started on January 24th, 2026  -->
+<!-- project phase two started on March 29th, 2026  -->
+<?php
+//start session to allow login state
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
