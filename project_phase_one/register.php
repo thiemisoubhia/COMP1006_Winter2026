@@ -12,6 +12,14 @@
         <input name="email" type="email" class="form-control mb-2" placeholder="Email" required>
         <input name="password" type="password" class="form-control mb-2" placeholder="Password" required>
 
+        <!-- referece: https://www.youtube.com/shorts/E6ta5cpzPEU -->
+        <div class="g-recaptcha" data-sitekey="6LeWXp0sAAAAAPRmPwKeeymbatciThEcNSSYFFGC"></div>
+
         <button class="btn btn-dark">Register</button>
     </form>
 </div>
+
+<!-- google api -->
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</body>
+</html>
