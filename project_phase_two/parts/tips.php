@@ -2,7 +2,6 @@
   <h2 class="mb-4 text-center">Resume Tips</h2>
   
   <div class="row">
-    
     <div class="col-md-4 mb-3">
       <ul class="list-unstyled">
         <li class="mb-3">
@@ -41,5 +40,5 @@
         </li>
       </ul>
     </div>
-    
   </div>
+</div>
