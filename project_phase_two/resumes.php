@@ -1,5 +1,8 @@
 <?php
 require_once "connect.php";
+
+require "parts/auth.php";// check user login
+
 include "parts/header.php";
 
 // Select resumes

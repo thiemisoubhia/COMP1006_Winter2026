@@ -1,6 +1,11 @@
 <?php
 require_once "connect.php"; // connect to database
+
+require "parts/auth.php";// check user login
+
 include "parts/header.php"; // header section
+
+
 
 // get id from URL
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
