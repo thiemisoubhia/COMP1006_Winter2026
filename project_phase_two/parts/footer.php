@@ -8,6 +8,9 @@
 <!-- including boostrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-</body>
+<!-- Google connection JS-->
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+</body>
+
 </html>
