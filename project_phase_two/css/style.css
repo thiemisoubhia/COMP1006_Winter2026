@@ -1,0 +1,25 @@
+* {
+    font-family: "Libre Franklin", sans-serif;
+}
+
+header {
+    background-color: #FEAFDF;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+nav {
+    font-size: 18px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+#feedback {
+    background-color: #FEAFDF;
+}
+
+form {
+    padding: 20px;
+}
