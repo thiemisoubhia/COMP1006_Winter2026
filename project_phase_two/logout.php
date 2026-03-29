@@ -2,7 +2,7 @@
 // end session and redirect them to login
 
 //include the auth file to ensure the session is started
-require "includes/auth.php";
+require "parts/auth.php";
 
 //clear sessions
 $_SESSION = [];
