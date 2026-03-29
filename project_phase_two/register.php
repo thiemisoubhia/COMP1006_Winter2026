@@ -1,25 +1,106 @@
-<!-- header part -->
-<?php require "parts/header.php"; ?>
+<?php
+session_start();
+require "connect.php";
+require "parts/header.php";
+
+// store errors and success message
+$errors = [];
+$success = "";
+
+// run only if form submitted
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    // secret key api 6LeWXp0sAAAAACpxpNu3wPGmPxfnIP9RRq2XkFDQ
+    $recaptchaSecret = "6LeWXp0sAAAAACpxpNu3wPGmPxfnIP9RRq2XkFDQ";
+    $recaptchaResponse = $_POST['g-recaptcha-response'] ?? '';
+
+    $verify = file_get_contents(
+        "https://www.google.com/recaptcha/api/siteverify?secret="
+        . $recaptchaSecret . "&response=" . $recaptchaResponse
+    );
+
+    $captchaSuccess = json_decode($verify);
+
+    if (!$captchaSuccess->success) {
+        $errors[] = "Please verify that you are not a robot.";
+    }
 
 
-<div class="container mt-5">
-    <h2>Create Account</h2>
+    $firstName = trim(filter_input(INPUT_POST,'first_name',FILTER_SANITIZE_SPECIAL_CHARS));
+    $lastName  = trim(filter_input(INPUT_POST,'last_name',FILTER_SANITIZE_SPECIAL_CHARS));
+    $email     = trim(filter_input(INPUT_POST,'email',FILTER_SANITIZE_EMAIL));
+    $password  = $_POST['password'] ?? '';
 
-    <!-- form to create new user -->
-    <form method="POST" action="register_process.php">
-        <input name="first_name" class="form-control mb-2" placeholder="First name" required>
-        <input name="last_name" class="form-control mb-2" placeholder="Last name" required>
-        <input name="email" type="email" class="form-control mb-2" placeholder="Email" required>
-        <input name="password" type="password" class="form-control mb-2" placeholder="Password" required>
 
-        <!-- referece: https://www.youtube.com/shorts/E6ta5cpzPEU -->
-        <div class="g-recaptcha" data-sitekey="6LeWXp0sAAAAAPRmPwKeeymbatciThEcNSSYFFGC"></div>
+    if ($firstName === '') $errors[] = "First name is required.";
+    if ($lastName === '')  $errors[] = "Last name is required.";
 
-        <button class="btn btn-dark">Register</button>
-    </form>
-</div>
+    if ($email === '') {
+        $errors[] = "Email is required.";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors[] = "Invalid email format.";
+    }
 
-<!-- google api -->
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
-</body>
-</html>
+    if ($password === '') {
+        $errors[] = "Password is required.";
+    } elseif (strlen($password) < 8) {
+        $errors[] = "Password must be at least 8 characters.";
+    }
+
+
+    if (empty($errors)) {
+        $stmt = $pdo->prepare("SELECT id FROM users WHERE email = :email");
+        $stmt->execute([':email' => $email]);
+
+        if ($stmt->fetch()) {
+            $errors[] = "This email is already registered.";
+        }
+    }
+
+
+    if (empty($errors)) {
+
+        // hash password
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+        $stmt = $pdo->prepare("
+            INSERT INTO users (first_name, last_name, email, password)
+            VALUES (:first, :last, :email, :password)
+        ");
+
+        $stmt->execute([
+            ':first' => $firstName,
+            ':last' => $lastName,
+            ':email' => $email,
+            ':password' => $hashedPassword
+        ]);
+
+        $success = "Account created successfully! You can now login.";
+    }
+}
+?>
+
+<main class="container mt-4">
+
+<h2>Register</h2>
+
+<?php if (!empty($errors)): ?>
+    <div class="alert alert-danger">
+        <ul>
+            <?php foreach ($errors as $error): ?>
+                <li><?= htmlspecialchars($error) ?></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+<?php endif; ?>
+
+<?php if ($success !== ""): ?>
+    <div class="alert alert-success">
+        <?= $success ?>
+        <br><a href="login.php" class="btn btn-success mt-2">Login</a>
+    </div>
+<?php endif; ?>
+
+</main>
+
+<?php require "parts/footer.php"; ?>

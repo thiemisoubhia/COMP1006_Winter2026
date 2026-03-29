@@ -4,8 +4,8 @@ session_start();
 
 //require parts
 //database connection
-require "includes/connect.php";
-require "includes/header.php";
+require "connect.php";
+require "parts/header.php";
 
 //errorMessage messages
 $errorMessage = "";
@@ -42,40 +42,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<main class="container mt-4">
-    <h2>Login</h2>
+<main class="flex-grow-1 d-flex align-items-center p-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <h2>Login</h2>
 
-    <?php if ($errorMessage !== ""): ?>
-        <div class="alert alert-danger">
-            <?= htmlspecialchars($errorMessage); ?>
+                <?php if ($errorMessage !== ""): ?>
+                    <div class="alert alert-danger">
+                        <?= htmlspecialchars($errorMessage); ?>
+                    </div>
+                <?php endif; ?>
+
+                <form method="post" class="mt-3">
+                    <!-- user or email to login -->
+                    <label for="username_or_email" class="form-label">Username or Email</label>
+                    <input
+                        type="text"
+                        id="username_or_email"
+                        name="username_or_email"
+                        class="form-control mb-3"
+                        required>
+
+                    <label for="password" class="form-label">Password</label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        class="form-control mb-4"
+                        required>
+
+                    <!-- buttons -->
+                    <button type="submit" class="btn btn-dark">Login</button>
+                    <a href="register.php" class="btn btn-secondary">Register</a>
+                </form>
+            </div>
         </div>
-    <?php endif; ?>
-
-    <form method="post" class="mt-3">
-        <!-- user or email to login -->
-        <label for="username_or_email" class="form-label">Username or Email</label>
-        <input
-            type="text"
-            id="username_or_email"
-            name="username_or_email"
-            class="form-control mb-3"
-            required
-        >
-
-        <label for="password" class="form-label">Password</label>
-        <input
-            type="password"
-            id="password"
-            name="password"
-            class="form-control mb-4"
-            required
-        >
-
-        <!-- buttons -->
-        <button type="submit" class="btn btn-primary">Login</button>
-        <a href="register.php" class="btn btn-secondary">Register</a>
-    </form>
+    </div>
 </main>
-
-<!-- footer require -->
-<?php require "includes/footer.php"; ?>

@@ -33,10 +33,9 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                        <a class="nav-item nav-link active" href="#">Home</a>
-                        <a class="nav-item nav-link" href="#tips">Tips</a>
-                        <a class="nav-item nav-link" href="#forms">Create your resume</a>
-                        <a class="nav-item nav-link" href="#feedback">Feedback</a>
+                        <a class="nav-item nav-link active" href="index.php">Home</a>
+                        <a class="nav-item nav-link" href="login.php">Login</a>
+                        <a class="nav-item nav-link" href="register.php">Register</a>
                     </div>
                 </div>
             </nav>

@@ -16,9 +16,6 @@ require "parts/header.php";
 // tips
 require "parts/tips.php";
 
-// form
-require "parts/form.php";
-
 // feedback
 require "parts/feedback.php";
 
