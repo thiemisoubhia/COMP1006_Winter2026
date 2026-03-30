@@ -15,15 +15,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $recaptchaResponse = $_POST['g-recaptcha-response'] ?? '';
 
     //verify recatcha
-    $verify = file_get_contents(
-        "https://www.google.com/recaptcha/api/siteverify?secret=" 
-        . $recaptchaSecret . "&response=" . $recaptchaResponse
-    );
-    $captchaSuccess = json_decode($verify);
+    // $verify = file_get_contents(
+    //     "https://www.google.com/recaptcha/api/siteverify?secret=" 
+    //     . $recaptchaSecret . "&response=" . $recaptchaResponse
+    // );
+    // $captchaSuccess = json_decode($verify);
 
-    if (!$captchaSuccess->success) {
-        $errors[] = "Please verify that you are not a robot.";
-    }
+    // if (!$captchaSuccess->success) {
+    //     $errors[] = "Please verify that you are not a robot.";
+    // }
 
     //validate input
     $firstName = trim(filter_input(INPUT_POST,'first_name',FILTER_SANITIZE_SPECIAL_CHARS));

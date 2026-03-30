@@ -90,7 +90,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_id'])) {
 
 
   <p class="mt-3">
-    <a class="btn btn-dark" href="index.php">Back</a>
+    <a class="btn btn-danger" href="index.php">Logout</a>
+  </p>
+    <p class="mt-3">
+    <a class="btn btn-dark" href="form.php">Create a Resume</a>
   </p>
 </main>
 

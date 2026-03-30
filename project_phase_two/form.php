@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 require "parts/auth.php";
 
 require "connect.php";
@@ -9,7 +7,7 @@ require "parts/header.php";
 
 <main class="container mt-4">
     <h2>Create your Resume</h2>
-    <p>Welcome <?= htmlspecialchars($_SESSION['username']) ?> 😊</p>
+    <h4>Welcome <?= htmlspecialchars($_SESSION['user_name']) ?>!</h4>
 
     <form method="post" action="save_resume.php">
 

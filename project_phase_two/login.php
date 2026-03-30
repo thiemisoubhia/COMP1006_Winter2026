@@ -2,41 +2,44 @@
 //start a session to manage user login
 session_start();
 
-//require parts
 //database connection
 require "connect.php";
 require "parts/header.php";
 
-//errorMessage messages
+//error message
 $errorMessage = "";
 
+//process form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $usernameOrEmail = trim($_POST['username_or_email'] ?? '');
+    $email = trim($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
 
-    if ($usernameOrEmail === '' || $password === '') {
-        $errorMessage = "Username/email and password are required.";
+    if ($email === '' || $password === '') {
+        $errorMessage = "Email and password are required.";
     } else {
-        $sql = "SELECT id, username, email, password
+        //select user by email
+        $sql = "SELECT id, first_name, last_name, email, password
                 FROM users
-                WHERE username = :login OR email = :login
+                WHERE email = :email
                 LIMIT 1";
         $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':login', $usernameOrEmail);
+        $stmt->bindParam(':email', $email);
         $stmt->execute();
 
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
+        //verify password
         if ($user && password_verify($password, $user['password'])) {
             session_regenerate_id(true);
 
             $_SESSION['user_id'] = $user['id'];
-            $_SESSION['username'] = $user['username'];
+            $_SESSION['user_name'] = $user['first_name'];
 
+            //redirect to resumes page after login
             header("Location: resumes.php");
             exit;
         } else {
-            $errorMessage = "Invalid username, email and/or password!!";
+            $errorMessage = "Invalid email and/or password.";
         }
     }
 }
@@ -48,21 +51,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="col-md-5">
                 <h2>Login</h2>
 
+                <!-- display errors -->
                 <?php if ($errorMessage !== ""): ?>
                     <div class="alert alert-danger">
                         <?= htmlspecialchars($errorMessage); ?>
                     </div>
                 <?php endif; ?>
 
+                
                 <form method="post" class="mt-3">
-                    <!-- user or email to login -->
-                    <label for="username_or_email" class="form-label">Username or Email</label>
+                    <label for="email" class="form-label">Email</label>
                     <input
-                        type="text"
-                        id="username_or_email"
-                        name="username_or_email"
+                        type="email"
+                        id="email"
+                        name="email"
                         class="form-control mb-3"
-                        required>
+                        required
+                    >
 
                     <label for="password" class="form-label">Password</label>
                     <input
@@ -70,13 +75,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         id="password"
                         name="password"
                         class="form-control mb-4"
-                        required>
+                        required
+                    >
 
-                    <!-- buttons -->
-                    <button type="submit" class="btn btn-dark">Login</button>
-                    <a href="register.php" class="btn btn-secondary">Register</a>
+                    <button type="submit" class="btn btn-dark w-100">Login</button>
+                    <a href="register.php" class="btn btn-secondary w-100 mt-2">Register</a>
                 </form>
             </div>
         </div>
     </div>
 </main>
+
+<?php require "parts/footer.php"; ?>
