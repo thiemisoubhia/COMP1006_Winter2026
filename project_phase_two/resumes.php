@@ -6,14 +6,14 @@ require "parts/auth.php";// check user login
 include "parts/header.php";
 
 // Select resumes
-$sqlSelect = "
-  SELECT id, first_name, last_name, position, skills, email, phone, bio
-  FROM resumes
-  ORDER BY id DESC
-";
+
+$sqlSelect = " SELECT id, first_name, last_name, position, skills, email, phone, bio
+FROM resumes
+WHERE user_id = :user_id
+ORDER BY id DESC";
 
 $stmt = $pdo->prepare($sqlSelect);
-$stmt->execute();
+$stmt->execute([':user_id' => $_SESSION['user_id']]);
 
 $resumes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -22,11 +22,14 @@ $resumes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_id'])) {
   $id = filter_input(INPUT_POST, 'delete_id', FILTER_VALIDATE_INT);
 
-  if ($id) {
-    $sql = "DELETE FROM resumes WHERE id = :id";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([':id' => $id]);
-  }
+$sql = "DELETE FROM resumes 
+        WHERE id = :id AND user_id = :user_id";
+
+$stmt = $pdo->prepare($sql);
+$stmt->execute([
+    ':id' => $id,
+    ':user_id' => $_SESSION['user_id']
+]);
 
   header("Location: resumes.php");
   exit;

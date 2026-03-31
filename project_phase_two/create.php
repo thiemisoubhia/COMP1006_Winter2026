@@ -1,5 +1,6 @@
 <?php
 require_once "connect.php";
+require "parts/auth.php";
 
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     header("Location: index.php");
@@ -61,13 +62,15 @@ if (!empty($errors)) {
 
 // Insert
 $sql = "INSERT INTO resumes
-(first_name, last_name, position, skills, email, phone, bio)
+(first_name, last_name, position, skills, email, phone, bio, user_id)
 VALUES
-(:first_name, :last_name, :position, :skills, :email, :phone, :bio)";
+(:first_name, :last_name, :position, :skills, :email, :phone, :bio, :user_id)";
 
 // Prepare the statement
 $stmt = $pdo->prepare($sql);
 
+//get the user id
+$userId = $_SESSION['user_id'];
 
 //map the named placeholder to the user data
 $stmt->bindParam(':first_name', $firstName);
@@ -77,6 +80,7 @@ $stmt->bindParam(':position', $position);
 $stmt->bindParam(':skills', $skills);
 $stmt->bindParam(':phone',$phone);
 $stmt->bindParam(':bio',$bio);
+$stmt->bindParam(':user_id',$userId);
 
 //execute statement
 $stmt->execute();
@@ -91,6 +95,5 @@ include "parts/header.php";
 
         <p class="mt-3">
             <a class="btn btn-dark" href="resumes.php">View Resumes</a>
-            <a class="btn btn-dark" href="resumes.php">Return to home</a>
         </p>
     </main>

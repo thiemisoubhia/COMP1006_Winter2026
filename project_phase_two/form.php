@@ -9,13 +9,13 @@ require "parts/header.php";
     <h2>Create your Resume</h2>
     <h4>Welcome <?= htmlspecialchars($_SESSION['user_name']) ?>!</h4>
 
-    <form method="post" action="save_resume.php">
+    <form method="post" action="create.php">
 
         <label>First Name</label>
-        <input type="text" name="first_name" class="form-control mb-2" required>
+        <input type="text" name="firstName" class="form-control mb-2" required>
 
         <label>Last Name</label>
-        <input type="text" name="last_name" class="form-control mb-2" required>
+        <input type="text" name="lastName" class="form-control mb-2" required>
 
         <label>Position</label>
         <input type="text" name="position" class="form-control mb-2" required>
