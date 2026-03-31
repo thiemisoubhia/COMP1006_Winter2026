@@ -11,19 +11,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // reference: https://www.youtube.com/watch?v=iAPcf8vD85E
     //Google recatcha secret key
-    $recaptchaSecret = "6LeWXp0sAAAAACpxpNu3wPGmPxfnIP9RRq2XkFDQ";
+    $recaptchaSecret = "6LdOMqAsAAAAAOya8SBJniO9ITsQ97EUAfCFHbax";
     $recaptchaResponse = $_POST['g-recaptcha-response'] ?? '';
 
     //verify recatcha
-    // $verify = file_get_contents(
-    //     "https://www.google.com/recaptcha/api/siteverify?secret=" 
-    //     . $recaptchaSecret . "&response=" . $recaptchaResponse
-    // );
-    // $captchaSuccess = json_decode($verify);
+    $verify = file_get_contents(
+        "https://www.google.com/recaptcha/api/siteverify?secret=" 
+        . $recaptchaSecret . "&response=" . $recaptchaResponse
+    );
+    $captchaSuccess = json_decode($verify);
 
-    // if (!$captchaSuccess->success) {
-    //     $errors[] = "Please verify that you are not a robot.";
-    // }
+    if (!$captchaSuccess->success) {
+        $errors[] = "Please verify that you are not a robot.";
+    }
 
     //validate input
     $firstName = trim(filter_input(INPUT_POST, 'first_name', FILTER_SANITIZE_SPECIAL_CHARS));
@@ -123,7 +123,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 <!-- reCAPTCHA -->
                 <div class="mb-3">
-                    <div class="g-recaptcha" data-sitekey="6LeWXp0sAAAAAPRmPwKeeymbatciThEcNSSYFFGC"></div>
+                    <div class="g-recaptcha" data-sitekey="6LdOMqAsAAAAAJa8R48TuKiyUqpzWjYJ_l_OJ0MI"></div>
                 </div>
 
                 <button type="submit" class="btn btn-dark w-100">Register</button>
