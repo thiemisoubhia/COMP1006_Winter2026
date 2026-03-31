@@ -11,7 +11,7 @@ include "parts/header_login.php";
     <h2>Create your Resume</h2>
     <h4>Welcome <?= htmlspecialchars($_SESSION['user_name']) ?>!</h4>
 
-    <form method="post" action="create.php">
+    <form method="post" action="create.php" enctype="multipart/form-data">
 
         <label>First Name</label>
         <input type="text" name="firstName" class="form-control mb-2" required>
@@ -33,6 +33,10 @@ include "parts/header_login.php";
 
         <label>Bio</label>
         <textarea name="bio" class="form-control mb-3" required></textarea>
+
+        <label>Profile Picture</label>
+        <input type="file" name="picture" class="form-control mb-3" accept=".jpg,.jpeg,.png,.webp">
+
 
         <button class="btn btn-success">Save Resume</button>
     </form>

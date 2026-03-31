@@ -11,8 +11,11 @@ require "parts/tips.php";
 //main
 require "parts/main.php";
 
-// feedback
+//feedback
 require "parts/feedback.php";
+
+//reflectiom
+require "parts/reflection.php";
 
 //footer
 require "parts/footer.php";

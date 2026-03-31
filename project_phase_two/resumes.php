@@ -1,17 +1,15 @@
 <?php
 require_once "connect.php";
 
-require "parts/auth.php";// check user login
+require "parts/auth.php"; // check user login
 
 //special header
 include "parts/header_login.php";
 
 // Select resumes
 
-$sqlSelect = " SELECT id, first_name, last_name, position, skills, email, phone, bio
-FROM resumes
-WHERE user_id = :user_id
-ORDER BY id DESC";
+$sqlSelect = "SELECT id, first_name, last_name, position, skills, email, phone, bio, picture
+FROM resumes WHERE user_id = :user_id ORDER BY id DESC";
 
 $stmt = $pdo->prepare($sqlSelect);
 $stmt->execute([':user_id' => $_SESSION['user_id']]);
@@ -23,14 +21,14 @@ $resumes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_id'])) {
   $id = filter_input(INPUT_POST, 'delete_id', FILTER_VALIDATE_INT);
 
-$sql = "DELETE FROM resumes 
+  $sql = "DELETE FROM resumes 
         WHERE id = :id AND user_id = :user_id";
 
-$stmt = $pdo->prepare($sql);
-$stmt->execute([
+  $stmt = $pdo->prepare($sql);
+  $stmt->execute([
     ':id' => $id,
     ':user_id' => $_SESSION['user_id']
-]);
+  ]);
 
   header("Location: resumes.php");
   exit;
@@ -48,6 +46,7 @@ $stmt->execute([
       <thead>
         <tr>
           <th>ID</th>
+          <th>Picture</th>
           <th>First Name</th>
           <th>Last Name</th>
           <th>Position</th>
@@ -55,36 +54,37 @@ $stmt->execute([
           <th>Email</th>
           <th>Phone</th>
           <th>Bio</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
         <?php foreach ($resumes as $resume): ?>
           <tr>
-            <td><?= $resume['id'] ?></td>
-            <td><?= $resume['first_name'] ?></td>
-            <td><?= $resume['last_name'] ?></td>
-            <td><?= $resume['position'] ?></td>
-            <td><?= $resume['skills'] ?></td>
-            <td><?= $resume['email'] ?></td>
-            <td><?= $resume['phone'] ?></td>
-            <td><?= $resume['bio'] ?></td>
+            <td><?= htmlspecialchars($resume['id']) ?></td>
+            <td>
+              <?php if ($resume['picture']): ?>
+                <img src="<?= htmlspecialchars($resume['picture']) ?>"
+                  alt="Profile Picture"
+                  width="50" height="50">
+              <?php else: ?>
+                N/A
+              <?php endif; ?>
+            </td>
+            <td><?= htmlspecialchars($resume['first_name']) ?></td>
+            <td><?= htmlspecialchars($resume['last_name']) ?></td>
+            <td><?= htmlspecialchars($resume['position']) ?></td>
+            <td><?= htmlspecialchars($resume['skills']) ?></td>
+            <td><?= htmlspecialchars($resume['email']) ?></td>
+            <td><?= htmlspecialchars($resume['phone']) ?></td>
+            <td><?= htmlspecialchars($resume['bio']) ?></td>
             <td class="text-nowrap">
-              <a
-                href="edit_resume.php?id=<?= $resume['id'] ?>"
-                class="btn btn-sm btn-secondary">
-                Edit
-              </a>
+              <a href="edit_resume.php?id=<?= $resume['id'] ?>" class="btn btn-sm btn-secondary">Edit</a>
 
-              <form
-                method="post"
-                class="d-inline"
+              <form method="post" class="d-inline"
                 onsubmit="return confirm('Are you sure you want to delete this resume?');">
                 <input type="hidden" name="delete_id" value="<?= $resume['id'] ?>">
-                <button type="submit" class="btn btn-sm btn-danger">
-                  Delete
-                </button>
+                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
               </form>
-
             </td>
           </tr>
         <?php endforeach; ?>
@@ -92,11 +92,8 @@ $stmt->execute([
     </table>
   <?php endif; ?>
 
-
   <p class="mt-3">
     <a class="btn btn-danger" href="logout.php">Logout</a>
-  </p>
-    <p class="mt-3">
     <a class="btn btn-dark" href="form.php">Create a Resume</a>
   </p>
 </main>

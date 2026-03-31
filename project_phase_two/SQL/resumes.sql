@@ -9,5 +9,6 @@ CREATE TABLE resumes (
     phone VARCHAR(50) NOT NULL,
     bio TEXT NOT NULL,
     user_id INT NOT NULL,
+    picture VARCHAR(255) NULL,
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
