@@ -3,7 +3,8 @@ require_once "connect.php";
 
 require "parts/auth.php";// check user login
 
-include "parts/header.php";
+//special header
+include "parts/header_login.php";
 
 // Select resumes
 

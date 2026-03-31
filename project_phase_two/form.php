@@ -2,7 +2,9 @@
 require "parts/auth.php";
 
 require "connect.php";
-require "parts/header.php";
+//special header
+include "parts/header_login.php";
+
 ?>
 
 <main class="container mt-4">

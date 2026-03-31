@@ -58,20 +58,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     //if no errors, insert to the table users
     if (empty($errors)) {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $stmt = $pdo->prepare("
-            INSERT INTO users (first_name, last_name, email, password)
-            VALUES (:first, :last, :email, :password)
-        ");
-        // prepare
+
+        $sql = "INSERT INTO users (first_name, last_name, email, password)
+                VALUES (:first_name, :last_name, :email, :password)";
+
         $stmt = $pdo->prepare($sql);
 
-        // bind params
+        // Bind parameters following the professor's style
         $stmt->bindParam(':first_name', $firstName);
-        $stmt->bindParam(':last_name',  $lastName);
-        $stmt->bindParam(':email',      $email);
+        $stmt->bindParam(':last_name', $lastName);
+        $stmt->bindParam(':email', $email);
         $stmt->bindParam(':password', $hashedPassword);
 
-        // execute
         $stmt->execute();
 
         $success = "Account created successfully! You can now login.";
