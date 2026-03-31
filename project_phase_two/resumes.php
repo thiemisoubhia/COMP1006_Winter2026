@@ -93,7 +93,7 @@ $stmt->execute([
 
 
   <p class="mt-3">
-    <a class="btn btn-danger" href="index.php">Logout</a>
+    <a class="btn btn-danger" href="logout.php">Logout</a>
   </p>
     <p class="mt-3">
     <a class="btn btn-dark" href="form.php">Create a Resume</a>

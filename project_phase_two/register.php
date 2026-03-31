@@ -26,9 +26,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // }
 
     //validate input
-    $firstName = trim(filter_input(INPUT_POST,'first_name',FILTER_SANITIZE_SPECIAL_CHARS));
-    $lastName  = trim(filter_input(INPUT_POST,'last_name',FILTER_SANITIZE_SPECIAL_CHARS));
-    $email     = trim(filter_input(INPUT_POST,'email',FILTER_SANITIZE_EMAIL));
+    $firstName = trim(filter_input(INPUT_POST, 'first_name', FILTER_SANITIZE_SPECIAL_CHARS));
+    $lastName  = trim(filter_input(INPUT_POST, 'last_name', FILTER_SANITIZE_SPECIAL_CHARS));
+    $email     = trim(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL));
     $password  = $_POST['password'] ?? '';
 
     if ($firstName === '') $errors[] = "First name is required.";
@@ -62,12 +62,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             INSERT INTO users (first_name, last_name, email, password)
             VALUES (:first, :last, :email, :password)
         ");
-        $stmt->execute([
-            ':first' => $firstName,
-            ':last' => $lastName,
-            ':email' => $email,
-            ':password' => $hashedPassword
-        ]);
+        // prepare
+        $stmt = $pdo->prepare($sql);
+
+        // bind params
+        $stmt->bindParam(':first_name', $firstName);
+        $stmt->bindParam(':last_name',  $lastName);
+        $stmt->bindParam(':email',      $email);
+        $stmt->bindParam(':password', $hashedPassword);
+
+        // execute
+        $stmt->execute();
+
         $success = "Account created successfully! You can now login.";
     }
 }
