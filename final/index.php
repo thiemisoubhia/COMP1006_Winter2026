@@ -1,113 +1,117 @@
-<?php require "includes/header.php" ?>
-<main>
-  <h2> Order Online - Easy & Simple (And Totally Secure...) 🧁</h2>
-  <form action="process.php" method="post">
+<?php
+session_start();
+require "connect.php";
+require "includes/header.php";
 
-    <!-- Customer Information -->
-    <fieldset>
-      <legend>Customer Information</legend>
-        <label for="first_name">First name</label>
-        <input type="text" id="first_name" name="first_name" min="3" max="20" required>
-        <label for="last_name">Last name</label>
-        <input type="text" id="last_name" name="last_name" min="3" max="40" required>
-        <label for="phone">Phone number</label>
-        <input type="tel" id="phone" name="phone" placeholder="555-123-4567" type="number" required>
-        <label for="address">Address</label>
-        <input type="text" id="address" name="address" required>
-        <label for="email">Address</label>
-        <input type="email" id="email" name="email" required>
-    </fieldset>
+//initialize errors and success message
+$errors = [];
+$success = "";
 
-    <!-- Order Details -->
-    <fieldset>
-      <legend>Order Details</legend>
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-      <p>
-        Enter a quantity for each item (use 0 if you don't want it).
-      </p>
+    //validate input
+    $firstName = trim(filter_input(INPUT_POST, 'first_name', FILTER_SANITIZE_SPECIAL_CHARS));
+    $lastName  = trim(filter_input(INPUT_POST, 'last_name', FILTER_SANITIZE_SPECIAL_CHARS));
+    $email     = trim(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL));
+    $password  = $_POST['password'] ?? '';
 
-      <table border="1" cellpadding="8" cellspacing="0">
-        <thead>
-          <tr>
-            <th scope="col">Baked Treat</th>
-            <th scope="col">Quantity</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">Chaos Croissant 🥐</th>
-            <td>
-              <label for="chaos_croissant" class="visually-hidden">Chaos Croissant quantity</label>
-              <input type="text" id="chaos_croissant" name="items[chaos_croissant]" min="0" max="24" value="0">
-            </td>
-          </tr>
+    if ($firstName === '') $errors[] = "First name is required.";
+    if ($lastName === '')  $errors[] = "Last name is required.";
 
-          <tr>
-            <th scope="row">Midnight Muffin 🌙</th>
-            <td>
-              <label for="midnight_muffin" class="visually-hidden">Midnight Muffin quantity</label>
-              <input type="text" id="midnight_muffin" name="items[midnight_muffin]" min="0" max="24" value="0">
-            </td>
-          </tr>
+    if ($email === '') {
+        $errors[] = "Email is required.";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors[] = "Invalid email format.";
+    }
 
-          <tr>
-            <th scope="row">Existential Éclair 🤔</th>
-            <td>
-              <label for="existential_eclair" class="visually-hidden">Existential Éclair quantity</label>
-              <input type="text" id="existential_eclair" name="items[existential_eclair]" min="0" max="24"
-                value="0">
-            </td>
-          </tr>
+    if ($password === '') {
+        $errors[] = "Password is required.";
+    } elseif (strlen($password) < 8) {
+        $errors[] = "Password must be at least 8 characters.";
+    }
 
-          <tr>
-            <th scope="row">Procrastination Cookie ⏰</th>
-            <td>
-              <label for="procrastination_cookie" class="visually-hidden">Procrastination Cookie quantity</label>
-              <input type="text" id="procrastination_cookie" name="items[procrastination_cookie]" min="0" max="24"
-                value="0">
-            </td>
-          </tr>
+    //check email
+    if (empty($errors)) {
+        $stmt = $pdo->prepare("SELECT id FROM users WHERE email = :email");
+        $stmt->execute([':email' => $email]);
+        if ($stmt->fetch()) {
+            $errors[] = "This email is already registered.";
+        }
+    }
 
-          <tr>
-            <th scope="row">Finals Week Brownie 📚</th>
-            <td>
-              <label for="finals_week_brownie" class="visually-hidden">Finals Week Brownie quantity</label>
-              <input type="text" id="finals_week_brownie" name="items[finals_week_brownie]" min="0" max="24"
-                value="0">
-            </td>
-          </tr>
+    //if no errors, insert to the table users
+    if (empty($errors)) {
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-          <tr>
-            <th scope="row">Victory Cinnamon Roll 🏆</th>
-            <td>
-              <label for="victory_cinnamon_roll" class="visually-hidden">Victory Cinnamon Roll quantity</label>
-              <input type="text" id="victory_cinnamon_roll" name="items[victory_cinnamon_roll]" min="0" max="24"
-                value="0">
-            </td>
-          </tr>
-        </tbody>
-      </table>
+        $sql = "INSERT INTO users (first_name, last_name, email, password)
+                VALUES (:first_name, :last_name, :email, :password)";
 
-    </fieldset>
+        $stmt = $pdo->prepare($sql);
 
-    <fieldset>
-      <legend>Additional Comments</legend>
+        // Bind parameters following the professor's style
+        $stmt->bindParam(':first_name', $firstName);
+        $stmt->bindParam(':last_name', $lastName);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':password', $hashedPassword);
 
-      <p>
-        <label for="comments">Comments (optional)</label><br>
-        <textarea id="comments" name="comments" rows="4"
-          placeholder="Allergies, delivery instructions, custom messages..."></textarea>
-      </p>
-    </fieldset>
+        $stmt->execute();
 
-    <p>
-      <button type="submit">Place Order</button>
-    </p>
+        $success = "Account created successfully! You can now login.";
+    }
+}
+?>
 
-  </form>
+<main class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2 class="mb-4 text-center">Register</h2>
+
+            <!-- Display errors -->
+            <?php if (!empty($errors)): ?>
+                <div class="alert alert-danger">
+                    <ul class="mb-0">
+                        <?php foreach ($errors as $error): ?>
+                            <li><?= htmlspecialchars($error) ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            <?php endif; ?>
+
+            <!-- Display success message -->
+            <?php if ($success !== ""): ?>
+                <div class="alert alert-success text-center">
+                    <?= $success ?>
+                    <br><a href="login.php" class="btn btn-success mt-2">Login</a>
+                </div>
+            <?php endif; ?>
+
+            <!-- Registration form -->
+            <form method="post" class="mt-3">
+                <div class="mb-3">
+                    <label for="first_name" class="form-label">First Name</label>
+                    <input type="text" id="first_name" name="first_name" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="last_name" class="form-label">Last Name</label>
+                    <input type="text" id="last_name" name="last_name" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" id="email" name="email" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" id="password" name="password" class="form-control" required>
+                    <small class="form-text text-muted">Password must be at least 8 characters.</small>
+                </div>
+
+
+                <button type="submit" class="btn btn-dark w-100">Register</button>
+                <a href="login.php" class="btn btn-secondary w-100 mt-2">Already have an account? Login</a>
+            </form>
+        </div>
+    </div>
 </main>
-</body>
 
-</html>
 
-<?php require "includes/footer.php" ?>
+<?php require "includes/footer.php"; ?>

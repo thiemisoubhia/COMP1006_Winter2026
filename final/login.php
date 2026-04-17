@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
-require "parts/header.php";
+require "includes/header.php";
 
 ?>
 
@@ -91,4 +91,4 @@ require "parts/header.php";
     </div>
 </main>
 
-<?php require "parts/footer.php"; ?>
+<?php require "includes/footer.php"; ?>
