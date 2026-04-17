@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     //check email
     if (empty($errors)) {
-        $stmt = $pdo->prepare("SELECT id FROM users WHERE email = :email");
+        $stmt = $pdo->prepare("SELECT id FROM final_users WHERE email = :email");
         $stmt->execute([':email' => $email]);
         if ($stmt->fetch()) {
             $errors[] = "This email is already registered.";
@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($errors)) {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-        $sql = "INSERT INTO users (first_name, last_name, email, password)
+        $sql = "INSERT INTO final_users (first_name, last_name, email, password)
                 VALUES (:first_name, :last_name, :email, :password)";
 
         $stmt = $pdo->prepare($sql);

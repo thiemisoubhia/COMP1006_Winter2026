@@ -36,6 +36,7 @@
                         <a class="nav-item nav-link active" href="index.php">Home</a>
                         <a class="nav-item nav-link" href="login.php">Login</a>
                         <a class="nav-item nav-link" href="gallery.php">Gallery</a>
+                        <a class="nav-item nav-link" href="form.php">Add Image</a>
                         <a class="nav-item nav-link btn-secondary" href="logout.php">Logout</a>
                     </div>
                 </div>
