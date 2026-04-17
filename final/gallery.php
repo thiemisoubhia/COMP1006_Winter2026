@@ -6,15 +6,14 @@ require "includes/auth.php"; // check user login
 //special header
 include "includes/header_login.php";
 
-// Select resumes
-
-$sqlSelect = "SELECT id, picture, legend
+// Select gallery
+$sqlSelect = "SELECT id, picture, title
 FROM gallery WHERE user_id = :user_id ORDER BY id DESC";
 
 $stmt = $pdo->prepare($sqlSelect);
 $stmt->execute([':user_id' => $_SESSION['user_id']]);
 
-$resumes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$gallery = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
 //delete
@@ -39,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_id'])) {
 <main class="container mt-4">
   <h1>Gallery</h1>
 
-  <?php if (count($resumes) === 0): ?>
+  <?php if (count($gallery) === 0): ?>
     <p>No images found.</p>
   <?php else: ?>
     <table class="table table-bordered mt-3">
@@ -51,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_id'])) {
         </tr>
       </thead>
       <tbody>
-        <?php foreach ($images as $image): ?>
+        <?php foreach ($gallery as $image): ?>
           <tr>
             <td><?= htmlspecialchars($image['id']) ?></td>
             <td>
@@ -74,8 +73,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_id'])) {
   <?php endif; ?>
 
   <p class="mt-3">
+    <a class="btn btn-dark" href="form.php">Add an Image</a>
     <a class="btn btn-danger" href="logout.php">Logout</a>
-    <a class="btn btn-dark" href="form.php">Create a Resume</a>
+
   </p>
 </main>
 

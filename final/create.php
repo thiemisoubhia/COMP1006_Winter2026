@@ -1,5 +1,5 @@
 <?php
-require_once "connect.php";
+require "connect.php";
 require "includes/auth.php";
 
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
@@ -48,7 +48,7 @@ if (!empty($errors)) {
     foreach ($errors as $error) {
         echo "<p style='color:red'>$error</p>";
     }
-    echo "<a href='index.php'>Go Back</a>";
+    echo "<a href='gallery.php'>Go Back</a>";
     exit;
 }
 
@@ -66,6 +66,8 @@ $userId = $_SESSION['user_id'];
 
 //map the named placeholder to the user data
 $stmt->bindParam(':title', $title);
+$stmt->bindParam(':user_id', $userId);
+$stmt->bindParam(':picture', $picturePath);
 
 //execute statement
 $stmt->execute();
@@ -76,7 +78,7 @@ include "includes/header.php";
 <main class="container mt-4 text-center p-5">
     <h2>Image Saved Successfull!!!</h2>
 
-    <?php echo "<h2>Thank you, " . $firstName . "! Your image has been added to the Gallery. </h2>" ?>
+    <?php echo "<h2>Thank you! Your image has been added to the Gallery. </h2>" ?>
 
     <p class="mt-3">
         <a class="btn btn-dark" href="gallery.php">View Gallery</a>

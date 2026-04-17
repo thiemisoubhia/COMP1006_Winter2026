@@ -14,10 +14,10 @@ include "includes/header_login.php";
     <form method="post" action="create.php" enctype="multipart/form-data">
 
         <label>Title</label>
-        <textarea name="bio" class="form-control mb-3" required></textarea>
+        <textarea name="title" class="form-control mb-3" required></textarea>
 
         <label>Image</label>
-        <input type="file" name="picture" class="form-control mb-3" accept=".jpg,.jpeg,.png,.webp">
+        <input type="file" name="picture" class="form-control mb-3" accept=".jpg,.jpeg,.png,.webp" required>
 
 
         <button class="btn btn-success">Submit</button>
