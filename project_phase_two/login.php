@@ -1,10 +1,13 @@
 <?php
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 //start a session to manage user login
 session_start();
 
 //database connection
 require "connect.php";
-require "parts/header.php";
 
 //error message
 $errorMessage = "";
@@ -43,6 +46,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
+require "parts/header.php";
+
 ?>
 
 <main class="flex-grow-1 d-flex align-items-center p-5">
