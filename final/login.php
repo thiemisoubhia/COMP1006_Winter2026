@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         //select user by email
         $sql = "SELECT id, first_name, last_name, email, password
-                FROM users
+                FROM final_users
                 WHERE email = :email
                 LIMIT 1";
         $stmt = $pdo->prepare($sql);
@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['user_name'] = $user['first_name'];
 
             //redirect to resumes page after login
-            header("Location: resumes.php");
+            header("Location: gallery.php");
             exit;
         } else {
             $errorMessage = "Invalid email and/or password.";

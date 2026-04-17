@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_id'])) {
         <tr>
           <th>ID</th>
           <th>Image</th>
-          <th>Legend</th>
+          <th>Title</th>
         </tr>
       </thead>
       <tbody>
@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_id'])) {
                 alt="Picture"
                 width="50" height="50">
             </td>
-            <td><?= htmlspecialchars($image['legend']) ?></td>
+            <td><?= htmlspecialchars($image['title']) ?></td>
             <td class="text-nowrap">
               <form method="post" class="d-inline"
                 onsubmit="return confirm('Are you sure you want to delete this image?');">

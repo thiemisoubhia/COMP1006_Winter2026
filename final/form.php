@@ -13,7 +13,7 @@ include "includes/header_login.php";
 
     <form method="post" action="create.php" enctype="multipart/form-data">
 
-        <label>Legend</label>
+        <label>Title</label>
         <textarea name="bio" class="form-control mb-3" required></textarea>
 
         <label>Image</label>
