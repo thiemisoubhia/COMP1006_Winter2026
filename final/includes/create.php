@@ -53,9 +53,9 @@ if (!empty($errors)) {
 }
 
 // Insert
-$sql = "INSERT INTO resumes
-            (first_name, last_name, position, skills, email, phone, bio, user_id, picture)
-            VALUES (:first_name, :last_name, :position, :skills, :email, :phone, :bio, :user_id, :picture)";
+$sql = "INSERT INTO gallery
+            (title, user_id, picture)
+            VALUES (:title, :user_id, :picture)";
 
 
 // Prepare the statement
@@ -65,28 +65,20 @@ $stmt = $pdo->prepare($sql);
 $userId = $_SESSION['user_id'];
 
 //map the named placeholder to the user data
-$stmt->bindParam(':first_name', $firstName);
-$stmt->bindParam(':last_name', $lastName);
-$stmt->bindParam(':email', $email);
-$stmt->bindParam(':position', $position);
-$stmt->bindParam(':skills', $skills);
-$stmt->bindParam(':phone', $phone);
-$stmt->bindParam(':bio', $bio);
-$stmt->bindParam(':user_id', $userId);
-$stmt->bindParam(':picture', $picturePath);
+$stmt->bindParam(':title', $title);
 
 //execute statement
 $stmt->execute();
 
 
-include "parts/header.php";
+include "includes/header.php";
 ?>
 <main class="container mt-4 text-center p-5">
-    <h2>Resume Saved Successfull</h2>
+    <h2>Image Saved Successfull!!!</h2>
 
-    <?php echo "<h2>Thank you, " . $firstName . "! Your resume has been added to the system. </h2>" ?>
+    <?php echo "<h2>Thank you, " . $firstName . "! Your image has been added to the Gallery. </h2>" ?>
 
     <p class="mt-3">
-        <a class="btn btn-dark" href="resumes.php">View Resumes</a>
+        <a class="btn btn-dark" href="gallery.php">View Gallery</a>
     </p>
 </main>
